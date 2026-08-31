@@ -5,6 +5,7 @@
 
 class PID {
 public:
+    PID(){};
     PID(float p, float i, float d, float absoluteMax = 0.0);
     float update(float input, float setpoint);
 private:
