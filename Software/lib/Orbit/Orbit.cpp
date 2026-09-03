@@ -36,15 +36,15 @@ float Orbit::orbit() {
         }
         last_highest = current_highest;
     }
-    for (int i = 0; i < TSSP_NO; i++){
-        Serial.print(sensor_values[i]);
-        Serial.print (" ");
-    }
+    // for (int i = 0; i < TSSP_NO; i++){
+    //     Serial.print(sensor_values[i]);
+    //     Serial.print (" ");
+    // }
     // Serial.print(direction);
-    Serial.println();
+    // Serial.println();
     // direction *= (360/TSSP_NO);
 
-
+    
     //calculate coordinates
     // float x_coord = 0;
     // x_coord = current_highest * sin(direction);

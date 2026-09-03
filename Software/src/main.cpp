@@ -10,26 +10,29 @@
 #include <Arduino.h>
 
 Motors gorobotgo;
-Motors move(int direction, int correction, int speed);
 Out out;
 Orbit orbit;
-PID correction;
-PID update(float input, float setpoint);
+PID correction(IMU_KP, IMU_KI, IMU_KD, 255);
 int targetHeading = 0;
 Adafruit_BNO055 bno = Adafruit_BNO055(55, BNO055_ADDRESS_B, &Wire1);
-
+//OPERATION_MODE_IMUPLUS
 
 void setup() {
   Serial.begin(9600);
-  bno.begin(OPERATION_MODE_IMUPLUS);
+  delay(1000);
+
   while(!bno.begin(OPERATION_MODE_IMUPLUS)) {
     Serial.println("No BNO055 detected. Check your wiring or I2C ADDR.");
     delay(1000);
   }
+  delay(500);
+  bno.setExtCrystalUse(true);
+  delay(500);
+
   gorobotgo.init();
   out.init();
   orbit.init();
-  bno.setExtCrystalUse(true);
+  
   
 
 
@@ -38,19 +41,18 @@ void setup() {
 void loop() {
   sensors_event_t compass;
   bno.getEvent(&compass);
-  float heading = float(compass.orientation.x);
-  heading = targetHeading - heading;
-  //Serial.print(heading);
-  if (heading > 180.0f) {
-      heading -= 360.0f;
-  }
+  // float heading = float(compass.orientation.x);
+  Serial.print(compass.orientation.x);
+  // if (heading > 180.0f) {
+  //     heading -= 360.0f;
+  // }
 
+  // float dir = orbit.orbit();
+  // float rotation = -correction.update(heading, targetHeading);
 
-  float dir = orbit.orbit();
-  float rotation = correction.update(heading, targetHeading);
-
-  gorobotgo.move(0.0, rotation, 0.0);
-  Serial.print(rotation);
+  // gorobotgo.move(0.0, rotation, 0.0);
+  // Serial.print("correction:");
+  // Serial.print(rotation);
   Serial.println();
 
 
@@ -70,6 +72,8 @@ void loop() {
   // digitalWrite(INA_4, HIGH);
   // digitalWrite(INB_4, LOW);
   // analogWrite(PWM_4, 25);
+  //seymore sucks
+  //testtesttest
   
 
 
