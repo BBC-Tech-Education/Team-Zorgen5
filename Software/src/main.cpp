@@ -78,7 +78,9 @@ void setup() {
 // }  
 
 void loop() {
-    static uint32_t last = 0;
+    static uint32_t last = 0, lastStatus = 0;
+    static uint8_t sysStat = 0, selfTest = 0, sysErr = 0;
+
     if (millis() - last < 10) return;
     last = millis();
 
@@ -88,10 +90,12 @@ void loop() {
     uint8_t sys, gyro, accel, mag;
     bno.getCalibration(&sys, &gyro, &accel, &mag);
 
-    uint8_t sysStat, selfTest, sysErr;
-    bno.getSystemStatus(&sysStat, &selfTest, &sysErr);
+    if (millis() - lastStatus > 2000) {
+        lastStatus = millis();
+        bno.getSystemStatus(&sysStat, &selfTest, &sysErr);
+    }
 
-    Serial.printf("t=%lu  hdg=%.2f  gyroCal=%u  sysStat=%u  sysErr=%u  mode=%u\n",
-                  millis(), compass.orientation.x, gyro, sysStat, sysErr,
-                  bno.getMode());
+    Serial.printf("t=%lu  hdg=%.2f  gyroCal=%u  mode=%u  sysStat=%u  sysErr=%u\n",
+                  millis(), compass.orientation.x, gyro,
+                  bno.getMode(), sysStat, sysErr);
 }
