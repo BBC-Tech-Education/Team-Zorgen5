@@ -29,12 +29,11 @@
 #define IR_10 45
 #define IR_11 46
 
-#define LIGHT_NO 6
-#define LS_D0 
-#define LS_D1
-#define LS_D2 
-#define LS_D3
-#define LS_OUT0
-#define LS_OUT1
+#define LS_D0 10
+#define LS_D1 9
+#define LS_D2 6
+#define LS_D3 5
+#define LS_OUT0 25
+#define LS_OUT1 24
 
 #endif

@@ -1,5 +1,5 @@
 #include <motors.h>
-#include <out.h>
+#include <Light Sensors.h>
 #include <pins.h>
 #include <Orbit.h>
 #include <constants.h>
@@ -10,7 +10,7 @@
 #include <Arduino.h>
 
 Motors gorobotgo;
-Out out;
+LightSensors ls;
 Orbit orbit;
 PID correction(IMU_KP, IMU_KI, IMU_KD, 255);
 int targetHeading = 0;
@@ -21,61 +21,27 @@ void setup() {
     Serial.begin(9600);
     delay(1000);
 
-    while(!bno.begin(OPERATION_MODE_IMUPLUS)) {
+    while(!bno.begin(OPERATION_MODE_CONFIG)) {
         Serial.println("No BNO055 detected. Check your wiring or I2C ADDR.");
         delay(1000);
     }
-    delay(500);
-    bno.setExtCrystalUse(true);
-    delay(500);
+    delay(25);
 
-    gorobotgo.init();
-    out.init();
-    orbit.init();
-  
-  
+    bno.setAxisRemap(Adafruit_BNO055::REMAP_CONFIG_P1);
+    bno.setAxisSign(Adafruit_BNO055::REMAP_SIGN_P7);
+    delay(25);
 
+    bno.setMode(OPERATION_MODE_IMUPLUS);
+    delay(25);
+
+
+    // gorobotgo.init();
+    ls.init();
+    // orbit.init();
 
 }
 
-
-// void loop() {
-//     sensors_event_t compass;
-//     bno.getEvent(&compass);
-//     // float heading = float(compass.orientation.x);
-//     Serial.print(compass.orientation.x);
-//     // if (heading > 180.0f) {
-//     //     heading -= 360.0f;
-//     // }
-
-//     // float dir = orbit.orbit();
-//     // float rotation = -correction.update(heading, targetHeading);
-
-//     // gorobotgo.move(0.0, rotation, 0.0);
-//     // Serial.print("correction:");
-//     // Serial.print(rotation);
-//     Serial.println();
-
-
-    
-//     // digitalWrite(INA_1, HIGH);
-//     // digitalWrite(INB_1, LOW);
-//     // analogWrite(PWM_1, 25);
-
-//     // digitalWrite(INA_2, HIGH);
-//     // digitalWrite(INB_2, LOW);
-//     // analogWrite(PWM_2, 25);
-
-//     // digitalWrite(INA_3, HIGH);
-//     // digitalWrite(INB_3, LOW);
-//     // analogWrite(PWM_3, 25);
-
-//     // digitalWrite(INA_4, HIGH);
-//     // digitalWrite(INB_4, LOW);
-//     // analogWrite(PWM_4, 25);
-//     //seymore sucks
-//     //testtesttest
-// }  
+  
 
 void loop() {
     static uint32_t last = 0, lastStatus = 0;
@@ -95,7 +61,19 @@ void loop() {
         bno.getSystemStatus(&sysStat, &selfTest, &sysErr);
     }
 
-    Serial.printf("t=%lu  hdg=%.2f  gyroCal=%u  mode=%u  sysStat=%u  sysErr=%u\n",
-                  millis(), compass.orientation.x, gyro,
-                  bno.getMode(), sysStat, sysErr);
+    // Serial.printf("t=%lu  hdg=%.2f  gyroCal=%u  mode=%u  sysStat=%u  sysErr=%u   %u\n",
+    //               millis(), compass.orientation.x, gyro,
+    //               bno.getMode(), sysStat, sysErr, sys);
+
+    
+    float heading = float(compass.orientation.x);
+    // Serial.print(compass.orientation.x);
+    if (heading > 180.0f) {
+        heading -= 360.0f;
+    }
+    // Serial.println(heading);
+    float rotation = correction.update(heading, targetHeading);
+    ls.read();
+    // Serial.println(rotation);
+    // gorobotgo.move(0.0f, rotation, 0.0f);
 }
