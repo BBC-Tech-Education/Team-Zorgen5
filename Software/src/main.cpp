@@ -35,9 +35,9 @@ void setup() {
     delay(25);
 
 
-    // gorobotgo.init();
+    gorobotgo.init();
     ls.init();
-    // orbit.init();
+    orbit.init();
 
 }
 
@@ -67,13 +67,17 @@ void loop() {
 
     
     float heading = float(compass.orientation.x);
-    // Serial.print(compass.orientation.x);
+    // Serial.println(compass.orientation.x);
+    // orbit.orbit();
     if (heading > 180.0f) {
         heading -= 360.0f;
     }
     // Serial.println(heading);
     float rotation = correction.update(heading, targetHeading);
-    ls.read();
+    // ls.read();
     // Serial.println(rotation);
-    // gorobotgo.move(0.0f, rotation, 0.0f);
+    gorobotgo.move(0.0f, 0.0f, 50.0f);
+
+
+    //updated code 22/9
 }

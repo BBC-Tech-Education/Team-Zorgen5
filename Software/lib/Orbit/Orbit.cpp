@@ -18,6 +18,11 @@ float Orbit::orbit() {
         }
         delayMicroseconds(10);
     }
+    for (int j = 0; j < TSSP_NO; j++) {
+        Serial.print(sensor_values[j]);
+        Serial.print(" ");
+    }
+    Serial.println("");
     // for (int t = 0; t < TSSP_NO; t++) {
     //     sensor_values[t] = 255 * (analogRead(IR_pins[t]) / 1023);
     // }
@@ -54,7 +59,6 @@ float Orbit::orbit() {
     // float y_target = y_coord - 100;
     
     // PID.update(x_coord, x_target);
-
 
     return direction; 
 }
