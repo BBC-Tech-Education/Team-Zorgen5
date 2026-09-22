@@ -14,12 +14,13 @@ float Orbit::orbit() {
     }
     for(int i = 0; i < 100; i++) {
         for(int t = 0; t < TSSP_NO; t++) {
-            sensor_values[t] += 1 - digitalRead(IR_pins[t]);
+            sensor_values[t] += (1 - digitalRead(IR_pins[t]));
+
         }
         delayMicroseconds(10);
     }
     // for (int t = 0; t < TSSP_NO; t++) {
-    //     sensor_values[t] = 255 * (analogRead(IR_pins[t]) / 1023);
+    //     sensor_values[t] = 255 * (analogRead(IR_pins[`````````````````````````````````````````````````````````````````````````````````t]) / 1023);
     // }
     // for (int i = 0; i < 3; i++){
     //     if (sensor_values[i] == 255){
@@ -40,8 +41,10 @@ float Orbit::orbit() {
     //     Serial.print(sensor_values[i]);
     //     Serial.print (" ");
     // }
-    // Serial.print(direction);
-    // Serial.println();
+    // Serial.print(sensor_values[10]);
+    // Serial.print("  ");
+    Serial.print(direction);
+    Serial.println();
     // direction *= (360/TSSP_NO);
 
     

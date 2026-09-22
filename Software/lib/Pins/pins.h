@@ -15,19 +15,19 @@
 #define INB_4 27
 
 
-#define TSSP_NO 3
-#define IR_0 19
-#define IR_1 38
-#define IR_2 14
-#define IR_3 38
-#define IR_4 39
-#define IR_5 40
-#define IR_6 41
-#define IR_7 49  
-#define IR_8 48
-#define IR_9 47
-#define IR_10 45
-#define IR_11 46
+#define TSSP_NO 12
+#define IR_0 39
+#define IR_1 18
+#define IR_2 19
+#define IR_3 20
+#define IR_4 21
+#define IR_5 22
+#define IR_6 23
+#define IR_7 15  
+#define IR_8 14
+#define IR_9 36
+#define IR_10 37
+#define IR_11 38   
 
 #define LS_D0 10
 #define LS_D1 9

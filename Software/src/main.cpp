@@ -37,7 +37,7 @@ void setup() {
 
     // gorobotgo.init();
     ls.init();
-    // orbit.init();
+    orbit.init();
 
 }
 
@@ -76,4 +76,5 @@ void loop() {
     ls.read();
     // Serial.println(rotation);
     // gorobotgo.move(0.0f, rotation, 0.0f);
+    orbit.orbit();
 }

@@ -43,10 +43,10 @@ void LightSensors::read()
         value[i] = analogRead(LS_OUT0);
         value[i] = analogRead(LS_OUT1);
 
-        Serial.print(analogRead(LS_OUT0));
-        Serial.print(" ");
+        // Serial.print(analogRead(LS_OUT0));
+        // Serial.print(" ");
     }
-    Serial.println();
+    // Serial.println();
 
     
 
