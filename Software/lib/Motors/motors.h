@@ -9,6 +9,7 @@ public:
     Motors() {};
     void init();
     void move(float direction, float correction, float speed);
+    void clockwise ();
 private:
     uint8_t pwm[4] = {PWM_1, PWM_2, PWM_3, PWM_4};
     uint8_t inA[4] = {INA_1,INA_2,INA_3,INA_4};

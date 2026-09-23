@@ -2,17 +2,17 @@
 
 #define MOTOR_NO 4
 #define PWM_1 12
-#define INA_1 35
-#define INB_1 34
-#define PWM_2 29
-#define INA_2 31
-#define INB_2 30
-#define PWM_3 28
-#define INA_3 33
-#define INB_3 32
+#define INA_1 26
+#define INB_1 35
+#define PWM_2 28
+#define INA_2 32
+#define INB_2 31
+#define PWM_3 29
+#define INA_3 30
+#define INB_3 27
 #define PWM_4 11
-#define INA_4 26
-#define INB_4 27
+#define INA_4 34
+#define INB_4 33
 
 
 #define TSSP_NO 12

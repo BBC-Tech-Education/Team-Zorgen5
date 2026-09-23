@@ -35,3 +35,11 @@ void Motors::move(float direction, float correction, float speed){
         analogWrite(pwm[i], round(2.0 * fabs(speeds[i])));
     }  
 }
+
+void Motors::clockwise(){
+    for (uint8_t i = 0; i < 4; i++) {
+        digitalWrite(inA[i], HIGH);
+        digitalWrite(inB[i], LOW);
+        analogWrite(pwm[i], 200);
+    }  
+}
