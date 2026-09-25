@@ -17,17 +17,17 @@
 
 #define TSSP_NO 12
 #define IR_0 39
-#define IR_1 38
-#define IR_2 37
-#define IR_3 36
-#define IR_4 14
-#define IR_5 15
+#define IR_1 18
+#define IR_2 19
+#define IR_3 20
+#define IR_4 21
+#define IR_5 22
 #define IR_6 23
-#define IR_7 22  
-#define IR_8 21
-#define IR_9 20
-#define IR_10 19
-#define IR_11 18
+#define IR_7 15  
+#define IR_8 14
+#define IR_9 36
+#define IR_10 37
+#define IR_11 38   
 
 #define LS_D0 10
 #define LS_D1 9

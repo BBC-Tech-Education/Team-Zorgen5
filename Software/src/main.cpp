@@ -15,7 +15,7 @@ Orbit orbit;
 PID correction(IMU_KP, IMU_KI, IMU_KD, 255);
 int targetHeading = 0;
 Adafruit_BNO055 bno = Adafruit_BNO055(55, BNO055_ADDRESS_B, &Wire1);
-//OPERATION_MODE_IMUPLUS
+// OPERATION_MODE_IMUPLUS
 
 void setup() {
     Serial.begin(9600);
@@ -38,12 +38,17 @@ void setup() {
     gorobotgo.init();
     ls.init();
     orbit.init();
-
+    pinMode(32,OUTPUT);
+    pinMode(31,OUTPUT);
+    pinMode(28,OUTPUT);
+    analogWriteFrequency(28,15000);
+    
 }
 
   
 
 void loop() {
+
     static uint32_t last = 0, lastStatus = 0;
     static uint8_t sysStat = 0, selfTest = 0, sysErr = 0;
 
@@ -61,9 +66,9 @@ void loop() {
         bno.getSystemStatus(&sysStat, &selfTest, &sysErr);
     }
 
-    // Serial.printf("t=%lu  hdg=%.2f  gyroCal=%u  mode=%u  sysStat=%u  sysErr=%u   %u\n",
-    //               millis(), compass.orientation.x, gyro,
-    //               bno.getMode(), sysStat, sysErr, sys);
+    Serial.printf("t=%lu  hdg=%.2f  gyroCal=%u  mode=%u  sysStat=%u  sysErr=%u   %u\n",
+                  millis(), compass.orientation.x, gyro,
+                  bno.getMode(), sysStat, sysErr, sys);
 
     
     float heading = float(compass.orientation.x);
@@ -75,9 +80,12 @@ void loop() {
     // Serial.println(heading);
     float rotation = correction.update(heading, targetHeading);
     // ls.read();
-    // Serial.println(rotation);
-    gorobotgo.move(0.0f, 0.0f, 50.0f);
+    Serial.println(rotation);
+    // gorobotgo.move(0.0f, -rotan  tion, 0.0f);
+    // orbit.orbit();
+    
+    // ls.read();
 
-
-    //updated code 22/9
+    // gorobotgo.test();
+ 
 }
