@@ -80,20 +80,11 @@ void loop() {
     float rotation = correction.update(heading, targetHeading);
     // ls.read();
     Serial.println(rotation);
-    // gorobotgo.move(0.0f, -rotation, 0.0f);
-    // gorobotgo.clockwise();
+    // gorobotgo.move(0.0f, -rotan  tion, 0.0f);
     // orbit.orbit();
     
     // ls.read();
 
-
-    digitalWrite(32, HIGH);
-    digitalWrite(31, LOW);
-    analogWrite(28, 200);
-    delay(1000);
-    digitalWrite(32, LOW);
-    digitalWrite(31, HIGH);
-    analogWrite(28, 200);
-    delay(1000);
-
+    // gorobotgo.test();
+ 
 }
