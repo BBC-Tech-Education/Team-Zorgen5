@@ -19,19 +19,37 @@ float Orbit::orbit() {
         }
         delayMicroseconds(10);
     }
-    for (int j = 0; j < TSSP_NO; j++) {
-        Serial.print(sensor_values[j]);
-        Serial.print(" ");
-    }
-    Serial.println("");
+    // for (int j = 0; j < TSSP_NO; j++) {
+    //     Serial.print(sensor_values[j]);
+    //     Serial.print(" ");
+        
+    // }
+    // Serial.println("");
+    // delay(1000);
     // for (int t = 0; t < TSSP_NO; t++) {
-    //     sensor_values[t] = 255 * (analogRead(IR_pins[`````````````````````````````````````````````````````````````````````````````````t]) / 1023);
+    //     sensor_values[t] = 255 * (analogRead(IR_pins[t]) / 1023);
     // }
     // for (int i = 0; i < 3; i++){
     //     if (sensor_values[i] == 255){
     //         sensor_values[i] = (sensor_values[i-1] + sensor_values[i+1])/2;
     //     }
     // }
+
+
+    //MAYBE USE EXPONENTIAL MOVING AVERAGE FILTER
+    for (int k = 0; k < TSSP_NO; k++) {
+        sensor_values[k] = ((alpha * sensor_values[k]) + (1 - alpha) * prevOutput[k]);
+        prevOutput[k] = sensor_values[k];
+    }
+
+
+    for (int j = 0; j < TSSP_NO; j++) {
+        Serial.print(sensor_values[j]);
+        Serial.print(" ");
+        
+    }
+
+
     int last_highest = 0;
     int current_highest = 0;
     int direction = 0;
@@ -47,10 +65,10 @@ float Orbit::orbit() {
     //     Serial.print (" ");
     // }
     // Serial.print(sensor_values[10]);
-    // Serial.print("  ");
-    Serial.print(direction);
-    Serial.println();
-    // direction *= (360/TSSP_NO);
+    Serial.print("                        ");
+    Serial.println(direction);
+    // delay(250);
+    direction *= (360/TSSP_NO);
 
     
     //calculate coordinates
@@ -65,6 +83,7 @@ float Orbit::orbit() {
 
     return direction; 
 }
+
 
 float Orbit::distance() {
     for (int i = 0; i < TSSP_NO; i++){

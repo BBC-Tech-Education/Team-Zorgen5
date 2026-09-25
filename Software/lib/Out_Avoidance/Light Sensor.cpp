@@ -58,15 +58,16 @@ void LightSensors::read()
 
 
 
-//     for (int i = 0; i < 10; i++) {
-//         for (int j = 0; j < LIGHT_NO; j++) {
-//             green[j] += analogRead(pin[j]);
-//         }
-//     }
-//     for (int i = 0; i < LIGHT_NO; i++) {
-//         green[i] /= 10;
-//         green[i] += LS_BUFFER;
-//     }
+
+    // for (int i = 0; i < 10; i++) {
+    //     for (int j = 0; j < 16; j++) {
+    //         green[j] += analogRead(pin[j]);
+    //     }
+    // }
+    // for (int i = 0; i < LIGHT_NO; i++) {
+    //     green[i] /= 10;
+    //     green[i] += LS_BUFFER;
+    // }
 // }
 
 //read sensors
@@ -81,15 +82,15 @@ void LightSensors::read()
 //     Serial.println();
 // }
 
-//detect line
-// int Out::lineDetection(){
+// detect line
+// int LightSensors::lineDetection(){
 //     read();
 //     int light_total = 0;
 //     int white_sensors = 0;
 //             // Serial.print(white_sensors);
 //             // Serial.print(light_total);
 //             // Serial.print("here");
-//     for (int i = 0; i < LIGHT_NO; i++){
+//     for (int i = 0; i < LS_DIGITAL_NUM; i++){
 //         if(onWhite[i] == true && onWhite[16 - i] == true){
 //             light_total += 0;
 //             white_sensors += 2;
@@ -110,7 +111,7 @@ void LightSensors::read()
 // }
 
 // //remembrance for if fully crossed line
-// int Out::lineRemembrance(int current_dir){
+// int LightSensors::lineRemembrance(int current_dir){
 //     int line_dir = lineDetection();
 //     int difference = abs(line_dir - facing_before);
 //     int move_dir = 0;

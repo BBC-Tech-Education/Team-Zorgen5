@@ -66,9 +66,9 @@ void loop() {
         bno.getSystemStatus(&sysStat, &selfTest, &sysErr);
     }
 
-    Serial.printf("t=%lu  hdg=%.2f  gyroCal=%u  mode=%u  sysStat=%u  sysErr=%u   %u\n",
-                  millis(), compass.orientation.x, gyro,
-                  bno.getMode(), sysStat, sysErr, sys);
+    // Serial.printf("t=%lu  hdg=%.2f  gyroCal=%u  mode=%u  sysStat=%u  sysErr=%u   %u\n",
+    //               millis(), compass.orientation.x, gyro,
+    //               bno.getMode(), sysStat, sysErr, sys);
 
     
     float heading = float(compass.orientation.x);
@@ -80,8 +80,9 @@ void loop() {
     // Serial.println(heading);
     float rotation = correction.update(heading, targetHeading);
     // ls.read();
+    float movedir = orbit.orbit();
     Serial.println(rotation);
-    // gorobotgo.move(0.0f, -rotan  tion, 0.0f);
+    gorobotgo.move(movedir + 180, -rotation, 25.0f);
     // orbit.orbit();
     
     // ls.read();

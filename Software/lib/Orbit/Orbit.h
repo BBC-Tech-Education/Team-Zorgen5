@@ -12,7 +12,10 @@ public:
     void init();
     bool ball();
     float distance();
+    void updateEMA();
 private:
+    double alpha = 0.5;
+    double prevOutput [12];
     int sensor_values [TSSP_NO];
     int IR_pins [TSSP_NO] = {
         IR_0 ,
