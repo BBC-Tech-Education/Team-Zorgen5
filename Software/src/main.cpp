@@ -38,10 +38,12 @@ void setup() {
     gorobotgo.init();
     ls.init();
     orbit.init();
-    pinMode(32,OUTPUT);
-    pinMode(31,OUTPUT);
-    pinMode(28,OUTPUT);
-    analogWriteFrequency(28,15000);
+
+    
+    ls.read();
+    ls.setgreen();
+  
+   
     
 }
 
@@ -81,7 +83,7 @@ void loop() {
     // ls.read();
     Serial.println(rotation);
     // gorobotgo.move(0.0f, -rotan  tion, 0.0f);
-    // orbit.orbit();
+    orbit.orbit();
     
     // ls.read();
 

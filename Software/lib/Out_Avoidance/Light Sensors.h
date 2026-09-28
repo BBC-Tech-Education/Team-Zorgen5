@@ -15,6 +15,7 @@ class LightSensors {
 
         void init();
         void read();
+        void setgreen();
 
         int lineDetection();
         int lineRemembrance(int current_dir);

@@ -9,7 +9,7 @@ void Orbit::init(){
 
 //calculate ball direction
 float Orbit::orbit() {
-    for (int i = 0; i < TSSP_NO; i++){
+    for(int i = 0; i < TSSP_NO; i++){
         sensor_values[i] = 0;
     }
     for(int i = 0; i < 100; i++) {
@@ -37,14 +37,13 @@ float Orbit::orbit() {
         }
         last_highest = current_highest;
     }
-    // for (int i = 0; i < TSSP_NO; i++){
-    //     Serial.print(sensor_values[i]);
-    //     Serial.print (" ");
-    // }
-    // Serial.print(sensor_values[10]);
-    // Serial.print("  ");
-    Serial.print(direction);
-    Serial.println();
+    for (int i = 0; i < TSSP_NO; i++){
+        Serial.print(sensor_values[i]);
+        Serial.print (" ");
+    }
+    delay(1000);
+    // Serial.print(direction);
+    // Serial.println();
     // direction *= (360/TSSP_NO);
 
     
