@@ -1,4 +1,5 @@
     #include <Orbit.h>
+    #include "constants.h"
 
 
 void Orbit::init(){
@@ -69,7 +70,12 @@ float Orbit::orbit() {
     // Serial.println(direction);
     // delay(250);
     direction *= (360/TSSP_NO);
+    if (direction > 180){
+        direction -= 360;
+    }
 
+
+    float orbitDir = OrbitP*cos((OrbitQ*direction-OrbitR)*DEG_TO_RAD);
     
     //calculate coordinates
     // float x_coord = 0;
@@ -81,32 +87,32 @@ float Orbit::orbit() {
     
     // PID.update(x_coord, x_target);
 
-    return direction; 
+    return orbitDir; 
 }
 
 
-float Orbit::distance() {
-    for (int i = 0; i < TSSP_NO; i++){
-        sensor_values[i] = 0;
-    }
-    for(int i = 0; i < 255; i++) {
-        for(int t = 0; t < TSSP_NO; t++) {
-            sensor_values[t] += 1 - digitalRead(IR_pins[t]);
-        }
-    }
-    for (int i = 0; i < 12; i++){
-        if (sensor_values[i] == 255){
-            sensor_values[i] = (sensor_values[i-1] + sensor_values[i+1])/2;
-        }
-    }
-    int last_highest = 0;
-    int current_highest = 0;
-    for (int i = 0; i < TSSP_NO; i++){
-        current_highest = max(sensor_values[i], last_highest);
-        last_highest = current_highest;
-    }
-    return current_highest;
-}
+// float Orbit::distance() {
+//     for (int i = 0; i < TSSP_NO; i++){
+//         sensor_values[i] = 0;
+//     }
+//     for(int i = 0; i < 255; i++) {
+//         for(int t = 0; t < TSSP_NO; t++) {
+//             sensor_values[t] += 1 - digitalRead(IR_pins[t]);
+//         }
+//     }
+//     for (int i = 0; i < 12; i++){
+//         if (sensor_values[i] == 255){
+//             sensor_values[i] = (sensor_values[i-1] + sensor_values[i+1])/2;
+//         }
+//     }
+//     int last_highest = 0;
+//     int current_highest = 0;
+//     for (int i = 0; i < TSSP_NO; i++){
+//         current_highest = max(sensor_values[i], last_highest);
+//         last_highest = current_highest;
+//     }
+//     return current_highest;
+// }
 
 
 

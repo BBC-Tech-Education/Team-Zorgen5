@@ -11,6 +11,11 @@
 #define MOTOR_KI -0.1
 #define MOTOR_KD -0.05
 
+#define OrbitP 254.99902
+#define OrbitQ 0.00630627
+#define OrbitR 1.57207
+
+
 #define LS_BUFFER 200
 
 #define Vision Serial1
