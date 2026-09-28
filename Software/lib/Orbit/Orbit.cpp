@@ -75,7 +75,8 @@ float Orbit::orbit() {
     }
 
 
-    float orbitDir = OrbitP*cos((OrbitQ*direction-OrbitR)*DEG_TO_RAD);
+    // float orbitDir = OrbitP * cos((OrbitQ * direction) - OrbitR);
+    float orbitDir = ((-OrbitA) * (direction * direction * direction)) + ((-OrbitB) * (direction * direction)) + (OrbitC * direction) + OrbitD;
     
     //calculate coordinates
     // float x_coord = 0;

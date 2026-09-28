@@ -89,11 +89,12 @@ void loop() {
     // Serial.println(rotation);
     // gorobotgo.move(0.0f, -rotation, 0.0f);
     // gorobotgo.move(movedir + 180, -rotation, 25.0f);
-    orbit.orbit();
+    // orbit.orbit();
+    Serial.println(movedir);
     if (detect == -1) {
         gorobotgo.move(movedir, -rotation, 20.0f);
     } else {
-        gorobotgo.move(pleaseeeee + 180, -rotation, 50.0f);
+        gorobotgo.move(pleaseeeee + 180, -rotation, 55.0f);
     }
     
     // ls.read();

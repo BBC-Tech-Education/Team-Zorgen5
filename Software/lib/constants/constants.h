@@ -15,6 +15,11 @@
 #define OrbitQ 0.00630627
 #define OrbitR 1.57207
 
+#define OrbitA 0.00000928084
+#define OrbitB 0.0001443
+#define OrbitC 1.59543
+#define OrbitD 0.909091
+
 
 #define LS_BUFFER 200
 

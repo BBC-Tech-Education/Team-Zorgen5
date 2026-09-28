@@ -207,8 +207,8 @@ int LightSensors::lineRemembrance(){
         }
     }
 
-    Serial.print("status: ");
-    Serial.println(current_status);
+    // Serial.print("status: ");
+    // Serial.println(current_status);
     //based off current status (in or out or on line), move in differetn direction.
     if (current_status == 0 || current_status == 1 || current_status == 2) {
         facing_before = line_dir;
