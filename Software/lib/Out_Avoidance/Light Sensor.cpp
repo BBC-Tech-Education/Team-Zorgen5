@@ -76,6 +76,18 @@ void LightSensors::setgreen(){
 // }
 
 
+// detect line
+// int LightSensors::lineDetection(){
+//     read();
+//     int light_total = 0;
+//     int white_sensors = 0;
+//             // Serial.print(white_sensors);
+//             // Serial.print(light_total);
+//             // Serial.print("here");
+//     for (int i = 0; i < LS_DIGITAL_NUM; i++){
+//         if(onWhite[i] == true && onWhite[16 - i] == true){
+//             light_total += 0;
+//             white_sensors += 2;
 
 // detect line
 int LightSensors::lineDetection(){
