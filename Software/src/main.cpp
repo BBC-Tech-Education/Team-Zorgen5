@@ -97,7 +97,7 @@ void loop() {
         gorobotgo.move(pleaseeeee + 180, -rotation, 55.0f);
     }
     
-    // ls.read();
+    ls.read();
 
     // gorobotgo.test();
  
