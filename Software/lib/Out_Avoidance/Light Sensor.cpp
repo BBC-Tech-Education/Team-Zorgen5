@@ -193,7 +193,8 @@ int LightSensors::lineRemembrance(){
         }
     } else if (current_status == 2) {
         if (line_dir == -1) {
-        current_status = 3;
+            last_known = facing_before;
+            current_status = 3;
         } else if (difference > 90) {
             current_status = 1;
         } else {
@@ -220,7 +221,7 @@ int LightSensors::lineRemembrance(){
         move_dir = line_dir;
         }
     } else {
-        move_dir = 0; /// fix 
+        move_dir = last_known;
     }
     return move_dir;
 }

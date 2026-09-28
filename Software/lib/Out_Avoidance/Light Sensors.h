@@ -23,6 +23,7 @@ class LightSensors {
     private:
         int current_status = 0;
         int facing_before = 0;
+        int last_known = 0;
         uint16_t green[LS_NUM] = {0};
         uint16_t value[LS_NUM] = {0};
         uint8_t onWhite[LS_NUM] = {0};
