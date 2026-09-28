@@ -19,7 +19,7 @@ void Motors::init(){
 void Motors::move(float direction, float correction, float speed){
     float speeds[4];
     for (uint8_t i = 0; i < 4; i++) {
-        speeds[i] = speed * cos((45.0 - i * 90.0 + direction) * DEG_TO_RAD) - correction; 
+        speeds[i] = speed * cos((225.0 - i * 90.0 + direction) * DEG_TO_RAD) - correction; 
     }
     //if highest goes over max (100) scale everything down by whatever ratio
     float highest_value = max(max(max(fabs(speeds[0]), fabs(speeds[1])), fabs(speeds[2])), fabs(speeds[3]));
@@ -40,11 +40,11 @@ void Motors::test(){
     for (uint8_t i = 0 ; i < 4 ; i++){
         digitalWrite(inA[i], HIGH);
         digitalWrite(inB[i], LOW);
-        analogWrite(pwm[i], 200);
+        analogWrite(pwm[i], 30);
         delay(1000);
         digitalWrite(inA[i], LOW);
         digitalWrite(inB[i], HIGH);
-        analogWrite(pwm[i], 200);
+        analogWrite(pwm[i], 30);
         delay(1000);
     }
 

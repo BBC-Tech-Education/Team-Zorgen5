@@ -45,11 +45,10 @@ void LightSensors::read()
         value[muxorder[i+16]] = analogRead(LS_OUT1);
 
 
-        Serial.print(analogRead(LS_OUT1));
-        Serial.print(" ");
+        // Serial.print(analogRead(LS_OUT0));
+        // Serial.print(" ");
     }
-    Serial.println("           0               0          ");
-    delay(1000);
+    // Serial.println("           0               0          ");
 
     
 
@@ -62,7 +61,10 @@ void LightSensors::setgreen(){
         green[i] += value[i];
         green[i] /= 10;
         green[i] += LS_BUFFER;
+        Serial.print(green[i]);
+        Serial.print ("   ");
     }
+
 }
 
 
@@ -90,40 +92,88 @@ void LightSensors::setgreen(){
 //             white_sensors += 2;
 
 // detect line
-int LightSensors::lineDetection(){
+float LightSensors::lineDetection(){
     read();
-    int light_total = 0;
+    float light_total = 0;
     int white_sensors = 0;
             // Serial.print(white_sensors);
             // Serial.print(light_total);
             // Serial.print("here");
+
+    for (int j = 0; j < 32; j++) {
+        onWhite[j] = false;
+    }
+
     for (int i = 0; i < 32; i++){
-        if (value[i] >> green[i]){
+        if (value[i] > green[i]){
             onWhite[i] = true;
-        }
-        else {
+        } else {
             onWhite[i] = false;
         }
-        if(onWhite[i] == true && onWhite[16 - i] == true){
+        if (onWhite[i] == true && onWhite[31 - i] == true) {
             light_total += 0;
             white_sensors += 2;
         }
-        else if (onWhite[i] == true){
-            light_total += i * 360 / 32;
+        else if (onWhite[i] == true){            
+            light_total += i * 11.25; //(360/32)
             white_sensors++;
-        }    
+        }
+
+        // Serial.print(onWhite[i]);
+        // Serial.print("    ");
     }
+
+    // if (onWhite[0] == true || onWhite[1] == true || onWhite[2] == true || onWhite[3] == true ){
+    //     bool flip = true;
+    //     for (int i = 0; i < 16; i++){
+    //         if (onWhite[i] == true){            
+    //         light_total += i * 11.25; //(360/32)
+    //         white_sensors++;
+    //         }
+    //     }
+    //     for (int i = 16; i < 32; i++){
+    //         if (onWhite[i] == true){
+    //         light_total -= (32-i) * 11.25; //(360/32)
+    //         white_sensors++;
+    //         }
+    //     }
+    // }
+    // else{ 
+    //     bool flip = false;
+    //     for(int i = 0; i < 32; i++){
+    //     if (onWhite[i] == true){
+    //     light_total += i * 11.25; //(360/32)
+    //     white_sensors++;
+    //     }    
+    // }
+
+
+
+
+//  else if (onWhite[i] == true) {
+//         light_total += i * 11.25; //(360/32)
+//         white_sensors++;
+//     }    
+
+
+    // }
+    // Serial.println("");
+    // Serial.print(light_total);
     if (white_sensors == 0){
-        int line_direction = -1;
+        float line_direction = -1.0f;
+        return line_direction;
+    } else if (white_sensors == 32) {
+        float line_direction = -1.0f;
+        return line_direction;
+    } else {
+        float line_direction = (light_total / white_sensors);
         return line_direction;
     }
-    int line_direction = light_total / white_sensors;
-    return line_direction;
-    // Serial.print(line_direction);
+
 }
 
 //remembrance for if fully crossed line
-int LightSensors::lineRemembrance(int current_dir){
+int LightSensors::lineRemembrance(){
     int line_dir = lineDetection();
     int difference = abs(line_dir - facing_before);
     int move_dir = 0;
@@ -134,29 +184,31 @@ int LightSensors::lineRemembrance(int current_dir){
         current_status = 0;
         }
     } else if (current_status == 1) {
-        if (difference > 150) {
-        current_status = 2;
-        } else if (line_dir == 0) {
-            current_status = 0;
+        if (line_dir == -1) {
+        current_status = 0;
+        } else if (difference > 90) {
+            current_status = 2;
         } else {
             current_status = 1;
         }
     } else if (current_status == 2) {
-        if (difference > 150) {
-        current_status = 1;
-        } else if (line_dir == 0) {
-            current_status = 3;
-        } else {
+        if (line_dir == -1) {
+        current_status = 3;
+        } else if (difference > 90) {
             current_status = 1;
+        } else {
+            current_status = 2;
         }
     } else if (current_status == 3) {
-        if (line_dir > 0) {
+        if (line_dir /= -1) {
             current_status = 2;
         } else {
         current_status = 3;
         }
     }
 
+    Serial.print("status: ");
+    Serial.println(current_status);
     //based off current status (in or out or on line), move in differetn direction.
     if (current_status == 0 || current_status == 1 || current_status == 2) {
         facing_before = line_dir;
@@ -168,7 +220,7 @@ int LightSensors::lineRemembrance(int current_dir){
         move_dir = line_dir;
         }
     } else {
-        move_dir = facing_before;
+        move_dir = 0; /// fix 
     }
     return move_dir;
 }

@@ -11,7 +11,7 @@
 #define MOTOR_KI -0.1
 #define MOTOR_KD -0.05
 
-#define LS_BUFFER 500
+#define LS_BUFFER 200
 
 #define Vision Serial1
 #define Bytesrequiredforpacket 6

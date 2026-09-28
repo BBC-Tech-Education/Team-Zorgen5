@@ -43,13 +43,13 @@ float Orbit::orbit() {
     }
 
 
-    for (int j = 0; j < TSSP_NO; j++) {
-        Serial.print(sensor_values[j]);
-        Serial.print(" ");
+    // for (int j = 0; j < TSSP_NO; j++) {
+    //     Serial.print(sensor_values[j]);
+    //     Serial.print(" ");
         
-    }
+    // }
 
-
+ 
     int last_highest = 0;
     int current_highest = 0;
     int direction = 0;
@@ -65,8 +65,8 @@ float Orbit::orbit() {
     //     Serial.print (" ");
     // }
     // Serial.print(sensor_values[10]);
-    Serial.print("                        ");
-    Serial.println(direction);
+    // Serial.print("                        ");
+    // Serial.println(direction);
     // delay(250);
     direction *= (360/TSSP_NO);
 
