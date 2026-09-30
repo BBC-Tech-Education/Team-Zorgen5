@@ -80,15 +80,16 @@ void loop() {
         heading -= 360.0f;
     }
     // Serial.println(heading);
-    float detect = ls.lineDetection();
-    int pleaseeeee = ls.lineRemembrance();
+    // float detect = ls.lineDetection();
+    // int pleaseeeee = ls.lineRemembrance();
     // Serial.println(detect);
     float rotation = correction.update(heading, targetHeading);
     // ls.read();
-    float movedir = orbit.orbit();
+    // float movedir = orbit.orbit();
     // Serial.println(rotation);
     // gorobotgo.move(0.0f, -rotation, 0.0f);
     // gorobotgo.move(movedir + 180, -rotation, 25.0f);
+<<<<<<< Updated upstream
     // orbit.orbit();
     Serial.println(movedir);
     if (detect == -1) {
@@ -96,8 +97,16 @@ void loop() {
     } else {
         gorobotgo.move(pleaseeeee + 180, -rotation, 55.0f);
     }
+=======
+    orbit.orbit();
+    // if (detect == -1) {
+    //     gorobotgo.move(movedir, -rotation, 20.0f);
+    // } else {
+    //     gorobotgo.move(pleaseeeee + 180, -rotation, 50.0f);
+    // }
+>>>>>>> Stashed changes
     
-    ls.read();
+    // ls.read();
 
     // gorobotgo.test();
  

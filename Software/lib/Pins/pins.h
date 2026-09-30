@@ -38,6 +38,6 @@
 #define LS_D2 6
 #define LS_D3 5
 #define LS_OUT0 25
-#define LS_OUT1 24
+#define LS_OUT1 24   
 
 #endif
