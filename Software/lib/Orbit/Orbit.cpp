@@ -10,6 +10,7 @@ void Orbit::init(){
 
 //calculate ball direction
 float Orbit::orbit() {
+    CANT_SEE = 0;
     for(int i = 0; i < TSSP_NO; i++){
         sensor_values[i] = 0;
     }
@@ -20,6 +21,13 @@ float Orbit::orbit() {
         }
         delayMicroseconds(10);
     }
+    for (int p = 0; p < 12; p++) {
+        CANT_SEE += sensor_values[p];
+    }
+    if (CANT_SEE == 0) {
+        return -0.6767;
+    }
+
     // for (int j = 0; j < TSSP_NO; j++) {
     //     Serial.print(sensor_values[j]);
     //     Serial.print(" ");

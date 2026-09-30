@@ -1,11 +1,14 @@
 #ifndef CONSTANTS_H
-#define COSTANTS_H
+#define CONSTANTS_H
 
 #include <Arduino.h>
 
 #define IMU_KP 0.6
 #define IMU_KI 0.01
 #define IMU_KD 0.043
+// #define IMU_KP 0.5
+// #define IMU_KI 0.01
+// #define IMU_KD 0.022
 
 #define MOTOR_KP -0.35
 #define MOTOR_KI -0.1
@@ -21,7 +24,7 @@
 #define OrbitD 0.909091
 
 
-#define LS_BUFFER 200
+#define LS_BUFFER 90
 
 #define Vision Serial1
 #define Bytesrequiredforpacket 6

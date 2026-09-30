@@ -17,6 +17,7 @@ private:
     double alpha = 0.5;
     double prevOutput [12];
     int sensor_values [TSSP_NO];
+    int CANT_SEE = 0;
     int IR_pins [TSSP_NO] = {
         IR_0 ,
         IR_1 ,

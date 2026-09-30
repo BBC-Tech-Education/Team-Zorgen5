@@ -29,15 +29,15 @@
 #define IR_10 37
 #define IR_11 38   
 
-// #define LS_D0 5
-// #define LS_D1 6
-// #define LS_D2 9
-// #define LS_D3 10
-#define LS_D0 10
-#define LS_D1 9
-#define LS_D2 6
-#define LS_D3 5
-#define LS_OUT0 25
-#define LS_OUT1 24
+#define LS_D0 5
+#define LS_D1 6
+#define LS_D2 9
+#define LS_D3 10
+// #define LS_D0 10
+// #define LS_D1 9
+// #define LS_D2 6
+// #define LS_D3 5
+#define LS_OUT0 24
+#define LS_OUT1 25
 
 #endif
