@@ -69,18 +69,19 @@ float Orbit::orbit() {
         }
         last_highest = current_highest;
     }
-    // for (int i = 0; i < TSSP_NO; i++){
-    //     Serial.print(sensor_values[i]);
-    //     Serial.print (" ");
-    // }
-    // Serial.print(sensor_values[10]);
-    // Serial.print("                        ");
-    // Serial.println(direction);
-    // delay(250);
+    for (int i = 0; i < TSSP_NO; i++){
+        Serial.print(sensor_values[i]);
+        Serial.print (" ");
+    }
+    // Serial.;
+    // Serial.print(sensor_values[6]);
+    // Serial.print("          ");
     direction *= (360/TSSP_NO);
     if (direction > 180){
         direction -= 360;
     }
+    Serial.println(direction);
+    // delay(500);
 
 
     // float orbitDir = OrbitP * cos((OrbitQ * direction) - OrbitR);

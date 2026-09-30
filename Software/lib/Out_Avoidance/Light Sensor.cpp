@@ -16,44 +16,6 @@ void LightSensors::init()
 
 
 
-float LightSensors::float_mod(float x, float y){
-    float r = fmod(x,y);
-    if (r < 0){
-        return r + y;
-    } else{
-        return r;
-    }
-}
-
-// setup for clusters
-float LightSensors::angle_between(float angle_left, float angle_right)
-{   
-    float albert = float_mod(abs(angle_left - angle_right), 360.0f);
-    return albert;
-}
-
-float LightSensors::smallest_angle_between(float angle_left, float angle_right)
-{
-    float angle = angle_between(angle_left, angle_right);
-    return fmin(angle, 360.0f - angle);
-}
-
-float LightSensors::mid_angle_between(float angle_left, float angle_right)
-{
-    if (angle_between(angle_left, angle_right) > 180){
-        float mucus = float_mod(angle_left + 0.5f * smallest_angle_between(angle_left , angle_right), 360.0f);
-        // Serial.print("poo");
-        return mucus;
-    } else {
-        float mucus = float_mod(angle_left + 0.5f * angle_between(angle_left , angle_right), 360.0f);
-        return mucus;
-    }
-    // Serial.println (mucus);
-
-}
-
-
-
 void LightSensors::read()
 {
     for (uint8_t i = 0; i < 16; i++) {
@@ -102,13 +64,9 @@ float LightSensors::calculate_line_direction()
 
     for (uint8_t i = 0; i < LS_NUM; i++) {
         onWhite[i] = (value[i] > green[i]);
-        // Serial.print(onWhite[i]); Serial.print(" ");
+        Serial.print(value[i]); Serial.print(" ");
     }
     Serial.println();
-    for (uint8_t i = 0; i < LS_NUM; i++) {
-        // Serial.print(green[i]); Serial.print(" ");
-    }
-    // Serial.println();
 
     uint8_t cluster_start[4] = {0};
     uint8_t cluster_end[4]   = {0};
@@ -174,7 +132,7 @@ float LightSensors::calculate_line_rememberance()
 {
     int line_dir = calculate_line_direction();
     Serial.println(line_dir);
-    delay(25);
+    // delay(25);
     int difference = abs(line_dir - facing_before);
     int move_dir = 0;
     if (current_status == 0) {
@@ -186,11 +144,20 @@ float LightSensors::calculate_line_rememberance()
     } else if (current_status == 1) {
         if (line_dir == -1) {
         current_status = 0;
-        } else if (difference > 100) {
+        } else if (difference > 45) {
+            current_status = 1.5;
+            test_status = facing_before;
+        } else {
+            current_status = 1;
+        }
+    } else if (current_status == 1.5) {
+        if (line_dir == -1) {
+        current_status = 0;
+        } else if (abs(line_dir - test_status > 90)) {
             current_status = 2;
             last_known = facing_before;
         } else {
-            current_status = 1;
+            current_status = 1.5;
         }
     } else if (current_status == 2) {
         if (line_dir == -1) {
@@ -215,7 +182,7 @@ float LightSensors::calculate_line_rememberance()
         facing_before = line_dir;
         if (current_status == 0) {
         move_dir = 0;
-        } else if (current_status == 1) {
+        } else if (current_status == 1 || current_status == 1.5) {
         move_dir = line_dir + 180;
         } else if (current_status == 2) {
         move_dir = line_dir;
@@ -231,7 +198,41 @@ float LightSensors::calculate_line_rememberance()
 
 
 
+float LightSensors::float_mod(float x, float y){
+    float r = fmod(x,y);
+    if (r < 0){
+        return r + y;
+    } else{
+        return r;
+    }
+}
 
+// setup for clusters
+float LightSensors::angle_between(float angle_left, float angle_right)
+{   
+    float albert = float_mod(abs(angle_left - angle_right), 360.0f);
+    return albert;
+}
+
+float LightSensors::smallest_angle_between(float angle_left, float angle_right)
+{
+    float angle = angle_between(angle_left, angle_right);
+    return fmin(angle, 360.0f - angle);
+}
+
+float LightSensors::mid_angle_between(float angle_left, float angle_right)
+{
+    if (angle_between(angle_left, angle_right) > 180){
+        float mucus = float_mod(angle_left + 0.5f * smallest_angle_between(angle_left , angle_right), 360.0f);
+        // Serial.print("poo");
+        return mucus;
+    } else {
+        float mucus = float_mod(angle_left + 0.5f * angle_between(angle_left , angle_right), 360.0f);
+        return mucus;
+    }
+    // Serial.println (mucus);
+
+}
 // float LightSensors::smallest_mid_angle_between(float angle_left, float angle_right)
 // {
 //     return float_mod(angle)

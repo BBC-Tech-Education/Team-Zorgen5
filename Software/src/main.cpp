@@ -62,17 +62,36 @@ void loop()
     // Serial.println(github);
     // gorobotgo.move(0.0f, -rotation, 0.0f);
     // gorobotgo.move(movedir + 180, -rotation, 25.0f);
+// <<<<</<< HEAD
     // Serial.println(pleaseeeee + 180);
-    // // Serial.println(detect);
-    // if (detect != -1) {
-    //     gorobotgo.move(github, -rotation, 100.0f);
-    // } else if (movedir == -0.6767) {
-    //     gorobotgo.move(0.0f, -rotation, 0.0f);
+    // Serial.println(detect);
+    if (detect != -1) {
+        gorobotgo.move(github, -rotation, 100.0f);
+    } else if (movedir == -0.6767) {
+        gorobotgo.move(0.0f, -rotation, 0.0f);
+    } else {
+        gorobotgo.move(movedir, -rotation, 50.0f);
+    }
+// =======
+// <<<<<<< Updated upstream
+    // orbit.orbit();
+//     Serial.println(movedir);
+//     if (detect == -1) {
+//         gorobotgo.move(movedir, -rotation, 20.0f);
+//     } else {
+//         gorobotgo.move(pleaseeeee + 180, -rotation, 55.0f);
+//     }
+// // =======
+//     orbit.orbit();
+    // if (detect == -1) {
+    //     gorobotgo.move(movedir, -rotation, 20.0f);
     // } else {
-    //     gorobotgo.move(90.0f, -rotation, 25.0f);
+    //     gorobotgo.move(pleaseeeee + 180, -rotation, 50.0f);
     // }
+// >>>>>>> Stashed changes
+// >>>>>>> 682c629ace52b932ef8864c1f3d3200e39fd20fd
     
     // ls.read();
 
-    gorobotgo.move(0.0f, -rotation, 0.0f);
+    // gorobotgo.move(0.0f, -rotation, 0.0f);
 }
