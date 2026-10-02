@@ -138,26 +138,9 @@ float LightSensors::calculate_line_rememberance()
     if (current_status == 0) {
         if (line_dir > 0) {
             current_status = 1;
+            first_touch = line_dir;
         } else {
         current_status = 0;
-        }
-    } else if (current_status == 1) {
-        if (line_dir == -1) {
-        current_status = 0;
-        } else if (difference > 45) {
-            current_status = 1.5;
-            test_status = facing_before;
-        } else {
-            current_status = 1;
-        }
-    } else if (current_status == 1.5) {
-        if (line_dir == -1) {
-        current_status = 0;
-        } else if (abs(line_dir - test_status > 90)) {
-            current_status = 2;
-            last_known = facing_before;
-        } else {
-            current_status = 1.5;
         }
     } else if (current_status == 2) {
         if (line_dir == -1) {
@@ -173,7 +156,17 @@ float LightSensors::calculate_line_rememberance()
         } else {
         current_status = 3;
         }
-    }
+    } else if (current_status == 1) {
+        if (line_dir != -1) {
+            if (abs(line_dir - first_touch) > 90) {
+                current_status = 2;
+            }
+        }
+        if (line_dir == -1) {
+        current_status = 0;
+        } else {
+            current_status = 1;
+        }
 
     Serial.print("status: ");
     Serial.println(current_status);
@@ -198,7 +191,7 @@ float LightSensors::calculate_line_rememberance()
 
 
 
-float LightSensors::float_mod(float x, float y){
+float LightSensors::float_mod(float x, float y) {
     float r = fmod(x,y);
     if (r < 0){
         return r + y;

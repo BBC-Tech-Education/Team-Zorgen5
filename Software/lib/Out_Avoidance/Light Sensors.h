@@ -25,7 +25,7 @@ private:
 
     float line_direction;
 
-    float test_status = 0;
+    float first_touch = 0;
 
     float float_mod(float x, float y);
     float angle_between(float angle_left, float angle_right);
