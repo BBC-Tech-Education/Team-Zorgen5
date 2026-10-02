@@ -70,7 +70,7 @@ void loop()
     } else if (movedir == -0.6767) {
         gorobotgo.move(0.0f, -rotation, 0.0f);
     } else {
-        gorobotgo.move(movedir, -rotation, 50.0f);
+        gorobotgo.move(movedir, -rotation, 15.0f);
     }
 // =======
 // <<<<<<< Updated upstream

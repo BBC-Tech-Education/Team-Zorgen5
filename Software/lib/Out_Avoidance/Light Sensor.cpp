@@ -64,7 +64,7 @@ float LightSensors::calculate_line_direction()
 
     for (uint8_t i = 0; i < LS_NUM; i++) {
         onWhite[i] = (value[i] > green[i]);
-        Serial.print(value[i]); Serial.print(" ");
+        // Serial.print(value[i]); Serial.print(" ");
     }
     Serial.println();
 
@@ -108,6 +108,7 @@ float LightSensors::calculate_line_direction()
         // Serial.println("chudkys");
         float cluster1 = mid_angle_between(cluster_start[0] * 11.25f, cluster_end[0] * 11.25f);
         float cluster2 = mid_angle_between(cluster_start[1] * 11.25f, cluster_end[1] * 11.25f);
+        // Serial.println(cluster1);
         // Serial.println(cluster2);
         float angle = angle_between(cluster1, cluster2);
         if (angle < 180){
@@ -124,28 +125,28 @@ float LightSensors::calculate_line_direction()
     // Serial.print(cluster_start[1] * 11.25);
     // Serial.print(" ");
     // Serial.println(cluster_end[1] * 11.25);
+    // Serial.println(cluster_num);
     return line_direction;
 }
 
 
-float LightSensors::calculate_line_rememberance()
-{
+float LightSensors::calculate_line_rememberance() {
     int line_dir = calculate_line_direction();
-    Serial.println(line_dir);
+    // Serial.println(line_dir);
     // delay(25);
-    int difference = abs(line_dir - facing_before);
+    int difference = fmin(abs(line_dir - first_touch),(360-abs(line_dir - first_touch)));
     int move_dir = 0;
     if (current_status == 0) {
         if (line_dir > 0) {
             current_status = 1;
             first_touch = line_dir;
         } else {
-        current_status = 0;
+            current_status = 0;
         }
     } else if (current_status == 2) {
         if (line_dir == -1) {
             current_status = 3;
-        } else if (difference > 100) {
+        } else if (difference < 88) {
             current_status = 1;
         } else {
             current_status = 2;
@@ -154,38 +155,37 @@ float LightSensors::calculate_line_rememberance()
         if (line_dir != -1) {
             current_status = 2;
         } else {
-        current_status = 3;
+            current_status = 3;
         }
     } else if (current_status == 1) {
         if (line_dir != -1) {
-            if (abs(line_dir - first_touch) > 90) {
+            if (difference > 88) {
                 current_status = 2;
             }
-        }
-        if (line_dir == -1) {
-        current_status = 0;
+        } else if (line_dir == -1) {
+            current_status = 0;
         } else {
             current_status = 1;
         }
+    }
 
-    Serial.print("status: ");
-    Serial.println(current_status);
+    // Serial.print("status: ");
+    // Serial.println(current_status);
     //based off current status (in or out or on line), move in differetn direction.
     if (current_status == 0 || current_status == 1 || current_status == 2) {
         facing_before = line_dir;
         if (current_status == 0) {
-        move_dir = 0;
-        } else if (current_status == 1 || current_status == 1.5) {
-        move_dir = line_dir + 180;
+            move_dir = 0;
+        } else if (current_status == 1) {
+            move_dir = line_dir + 180;
         } else if (current_status == 2) {
-        move_dir = line_dir;
+            move_dir = line_dir;
         }
     } else {
         move_dir = last_known;
         // Serial.println(last_known);
     }
     return move_dir;
-
 }
 
 

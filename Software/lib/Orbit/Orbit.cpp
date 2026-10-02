@@ -16,10 +16,10 @@ float Orbit::orbit() {
     }
     for(int i = 0; i < 100; i++) {
         for(int t = 0; t < TSSP_NO; t++) {
-            sensor_values[t] += (1 - digitalRead(IR_pins[t]));
+            sensor_values[t] += (1 - digitalReadFast(IR_pins[t]));
 
         }
-        delayMicroseconds(10);
+        delayMicroseconds(20);
     }
     for (int p = 0; p < 12; p++) {
         CANT_SEE += sensor_values[p];
@@ -69,10 +69,10 @@ float Orbit::orbit() {
         }
         last_highest = current_highest;
     }
-    for (int i = 0; i < TSSP_NO; i++){
-        Serial.print(sensor_values[i]);
-        Serial.print (" ");
-    }
+    // for (int i = 0; i < TSSP_NO; i++){
+    //     Serial.print(sensor_values[i]);
+    //     Serial.print (" ");
+    // }
     // Serial.;
     // Serial.print(sensor_values[6]);
     // Serial.print("          ");
@@ -80,8 +80,9 @@ float Orbit::orbit() {
     if (direction > 180){
         direction -= 360;
     }
-    Serial.println(direction);
+    // Serial.println(direction);
     // delay(500);
+    Serial.println(direction);
 
 
     // float orbitDir = OrbitP * cos((OrbitQ * direction) - OrbitR);
