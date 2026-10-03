@@ -132,7 +132,7 @@ float LightSensors::calculate_line_direction()
 
 float LightSensors::calculate_line_rememberance() {
     int line_dir = calculate_line_direction();
-    // Serial.println(line_dir);
+    Serial.println(line_dir);
     // delay(25);
     int difference = fmin(abs(line_dir - first_touch),(360-abs(line_dir - first_touch)));
     int move_dir = 0;
@@ -146,7 +146,7 @@ float LightSensors::calculate_line_rememberance() {
     } else if (current_status == 2) {
         if (line_dir == -1) {
             current_status = 3;
-        } else if (difference < 88) {
+        } else if (difference < 100) {
             current_status = 1;
         } else {
             current_status = 2;
@@ -160,7 +160,7 @@ float LightSensors::calculate_line_rememberance() {
         }
     } else if (current_status == 1) {
         if (line_dir != -1) {
-            if (difference > 88) {
+            if (difference > 100) {
                 current_status = 2;
                 last_known = line_dir;
             }
@@ -171,8 +171,8 @@ float LightSensors::calculate_line_rememberance() {
         }
     }
 
-    // Serial.print("status: ");
-    // Serial.println(current_status);
+    Serial.print("status: ");
+    Serial.println(current_status);
     //based off current status (in or out or on line), move in differetn direction.
     if (current_status == 0 || current_status == 1 || current_status == 2) {
         facing_before = line_dir;
