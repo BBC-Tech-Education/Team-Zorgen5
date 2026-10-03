@@ -24,7 +24,7 @@
 #define OrbitD 0.909091
 
 
-#define LS_BUFFER 130
+#define LS_BUFFER 500
 
 #define Vision Serial1
 #define Bytesrequiredforpacket 6
