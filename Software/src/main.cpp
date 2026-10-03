@@ -64,13 +64,15 @@ void loop()
     // gorobotgo.move(movedir + 180, -rotation, 25.0f);
 // <<<<</<< HEAD
     // Serial.println(pleaseeeee + 180);
-    // Serial.println(detect);
+    Serial.println(movedir);
     if (detect != -1) {
         gorobotgo.move(github, -rotation, 100.0f);
     } else if (movedir == -0.6767) {
         gorobotgo.move(0.0f, -rotation, 0.0f);
+    } else if (movedir > -1 && movedir < 1) {
+        gorobotgo.move(0.0f, -rotation, 40.0f);
     } else {
-        gorobotgo.move(movedir, -rotation, 15.0f);
+        gorobotgo.move(movedir, -rotation, 35.0f);
     }
 // =======
 // <<<<<<< Updated upstream

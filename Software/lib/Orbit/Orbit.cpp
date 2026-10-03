@@ -82,7 +82,7 @@ float Orbit::orbit() {
     }
     // Serial.println(direction);
     // delay(500);
-    Serial.println(direction);
+    // Serial.println(direction);
 
 
     // float orbitDir = OrbitP * cos((OrbitQ * direction) - OrbitR);

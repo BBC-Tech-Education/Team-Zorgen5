@@ -150,6 +150,7 @@ float LightSensors::calculate_line_rememberance() {
             current_status = 1;
         } else {
             current_status = 2;
+            last_known = line_dir;
         }
     } else if (current_status == 3) {
         if (line_dir != -1) {
@@ -161,6 +162,7 @@ float LightSensors::calculate_line_rememberance() {
         if (line_dir != -1) {
             if (difference > 88) {
                 current_status = 2;
+                last_known = line_dir;
             }
         } else if (line_dir == -1) {
             current_status = 0;
@@ -183,7 +185,8 @@ float LightSensors::calculate_line_rememberance() {
         }
     } else {
         move_dir = last_known;
-        // Serial.println(last_known);
+        Serial.print("lastknown:");
+        Serial.println(last_known);
     }
     return move_dir;
 }
